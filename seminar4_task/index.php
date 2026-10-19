@@ -9,6 +9,20 @@ $group = trim($_POST['group'] ?? '');
 $subject = trim($_POST['subject']?? '');
 $class = trim($_POST['class'] ?? '');
 
+$errors = [];
+
+if ($group === '') {
+    $errors[] = 'Укажите группу';   
+}
+
+if ($subject === '') {
+    $errors[] = 'Укажите предмет';
+}
+
+if ($class === '') {
+    $errors[] = 'Укажите аудиторию';
+}
+
 if ($group !== '' && $subject !== '' && $class !== '') {
     $_SESSION['lessons'][] = [
         'group' => $group,
@@ -48,6 +62,7 @@ if ($group !== '' && $subject !== '' && $class !== '') {
                         <th>Предмет</th>
                         <th>Аудитория</th>
                     </tr>
+                    <?php if (empty($errors)) ?>
                     <?php foreach ($_SESSION['lessons'] as $lesson): ?> 
                     <tr>
                         <td><?php echo htmlspecialchars($lesson['group']) ?></td>
@@ -55,9 +70,18 @@ if ($group !== '' && $subject !== '' && $class !== '') {
                         <td><?php echo htmlspecialchars($lesson['class']) ?></td>
                     </tr>
                     <?php endforeach ?>
+                    
                 </table>
                 
             </form>
+            <?php if (!empty($errors)): ?>
+                <h4>Ошибка!</h4>
+                <ul>
+                    <?php foreach ($errors as $error): ?>
+                        <li><?php echo htmlspecialchars($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
         </main>
         
     </body>
