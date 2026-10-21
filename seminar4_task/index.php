@@ -67,48 +67,58 @@ if (isset($_POST['add'])) {
         </header>
 
         <main>
-            <h1>Расписание занятий</h1>
+            <h1 class="text-center">Расписание занятий</h1>
+            <hr>
 
             <form action="index.php" method="post">
-                <article>
-                    <p>Группа</p>
-                    <input type="text" name="group">
+                <section class="main-category">
+                    <article class="category">
+                        <p>Группа</p>
+                        <input type="text" name="group">
 
-                    <p>Предмет</p>
-                    <input type="text" name="subject">
+                        <p>Предмет</p>
+                        <input type="text" name="subject">
 
-                    <p>Аудитория</p>
-                    <input type="text" name="class">
+                        <p>Аудитория</p>
+                        <input type="text" name="class">
 
-                    <button type="submit" name="add">Добавить занятие</button>
-                    <button type="submit" name="clear">Очистить таблицу</button>
-                </article>
+                        <div class="buttons">
+                            <button class="button" type="submit" name="add">Добавить занятие</button>
+                            <button class="button" type="submit" name="clear">Очистить таблицу</button>
+                        </div>
+                    
+                    </article>
 
-                <h2>Полученные данные<h2>
-                <table border="1">
-                    <tr>
-                        <th>Группа</th>
-                        <th>Предмет</th>
-                        <th>Аудитория</th>
-                    </tr>
-                    <?php if (empty($errors)) ?>
-                        <?php foreach ($_SESSION['lessons'] as $lesson): ?> 
+                    <article>
+                        <h2 class="text-center">Список занятий<h2>
+                        <table class="table">
                             <tr>
-                                <td><?php echo htmlspecialchars($lesson['group']) ?></td>
-                                <td><?php echo htmlspecialchars($lesson['subject']) ?></td>
-                                <td><?php echo htmlspecialchars($lesson['class']) ?></td>
+                                <th>Группа</th>
+                                <th>Предмет</th>
+                                <th>Аудитория</th>
                             </tr>
-                        <?php endforeach; ?>
-                </table>
-                
+                            <?php if (empty($errors)) ?>
+                                <?php foreach ($_SESSION['lessons'] as $lesson): ?> 
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($lesson['group']) ?></td>
+                                        <td><?php echo htmlspecialchars($lesson['subject']) ?></td>
+                                        <td><?php echo htmlspecialchars($lesson['class']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                        </table>
+                    </article>
+                </section>
             </form>
-            <?php if (!empty($errors)) ?>
-                <h4>Ошибка!</h4>
-                <ul>
-                    <?php foreach ($errors as $error): ?>
-                        <li><?php echo htmlspecialchars($error); ?></li>
-                    <?php endforeach; ?>
-                </ul>
+
+            <article class="errors">
+                <?php if (!empty($errors)) ?>
+                    <h4>Список ошибок:</h4>
+                    <ul>
+                        <?php foreach ($errors as $error): ?>
+                            <li><?php echo htmlspecialchars($error); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+            </article>
         </main>
         
     </body>
