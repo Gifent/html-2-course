@@ -48,21 +48,24 @@ if (isset($_POST['add'])) {
 }
 ?>
 
-#TODO HTML and CSS
-
 <html>
     <head>
+        <link href="style.css" rel="stylesheet">
         <title>Расписание</title>
     </head>
 
-    <header>
-        <div>
-            <p>Расписание</p>
-            <p>Практическая работа №4</p>
-        </div>
-    </header>
-
     <body>
+        <header>
+            <div class="display">
+                <p>Расписание</p>
+            </div>
+            <nav class="flex">
+                <a href="#table">Таблица</a>
+                <a href="#form">Форма</a>
+                <a href="#info">О нас</a>
+            </nav>
+        </header>
+
         <main>
             <h1>Расписание занятий</h1>
 
