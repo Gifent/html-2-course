@@ -7,9 +7,9 @@ if (!isset($_SESSION['lessons'])) {
 
 $errors = [];
 
-$group = trim($_POST['group'] ?? '');
-$subject = trim($_POST['subject'] ?? '');
-$class = trim($_POST['class'] ?? '');
+$group = trim($_POST['group']);
+$subject = trim($_POST['subject']);
+$class = trim($_POST['class']);
 
 
 if (isset($_POST['clear'])) {
