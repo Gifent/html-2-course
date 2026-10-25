@@ -1,10 +1,10 @@
 <?php 
 class Lesson {
-    private $group;
-    private $subject;
-    private $class;
+    private string $group;
+    private string $subject;
+    private string $class;
 
-    public function __construct($group123, $subject, $class) {
+    public function __construct(string $group123, string $subject, string $class) {
         $this->group = $group123;
         $this->subject = $subject;
         $this->class = $class;
@@ -22,7 +22,7 @@ class Lesson {
         return $this->class;
     }
 
-    public function isDuplicate($lesson) {
+    public function isDuplicate(Lesson $lesson) {
         return $this->group === $lesson->getGroup() && $this->subject === 
         $lesson->getSubject() && $this->class === $lesson->getClass();
     }

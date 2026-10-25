@@ -1,6 +1,6 @@
 <?php
 require_once 'Lesson.php';
-require_once 'CatalogService.php';
+require_once 'LessonService.php';
 
 session_start();
 
@@ -9,14 +9,14 @@ if (!isset($_SESSION['lessons'])) {
 }
 
 $errors = [];
-$service = new CatalogService();
+$service = new LessonService();
 
-$lesson = new Lesson(trim($_POST['group']) ?? '', 
-trim($_POST['subject']) ?? '',
-trim($_POST['class']) ?? '');
+$lesson = new Lesson(trim($_POST['group'] ?? ''), 
+trim($_POST['subject'] ?? ''),
+trim($_POST['class'] ?? ''));
 
 if (isset($_POST['clear'])) {
-    $_SESSION['lessons'] = [];
+    $service->clear($_SESSION['lessons']);
 }
 
 if (isset($_POST['add'])) {
@@ -36,9 +36,7 @@ if (isset($_POST['add'])) {
         if ($service->hasDuplicate($lesson, $_SESSION['lessons'])) {
             $errors[] = 'Пара для данной группы в данной аудитории уже есть';
         } else {
-            $_SESSION['lessons'][] = ['group' => $lesson->getGroup(),
-             'subject' => $lesson->getSubject(),
-              'class' => $lesson->getClass()];
+            $service->addLesson($lesson, $_SESSION['lessons']);
         }
     }
 }
